@@ -12,6 +12,5 @@ public interface CommodityDao extends JpaRepository<Commodity, Long> {
 
     Commodity findCommodityByName(String name);
 
-    Commodity
-    void save(Commodity commodity);
+
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Commodity;
+import com.example.demo.domain.User;
 
 public interface CommodityService {
 
@@ -14,7 +15,7 @@ public interface CommodityService {
      */
 
 
-    Commodity addCommodity(String name, String price, String description, String number);
+    Commodity createCommodity(String name, String price, String description, String number);
     /**
      * 编辑商品逻辑
      * @param name 商品名
@@ -44,9 +45,5 @@ public interface CommodityService {
     Commodity BuyCommodityById(Long id, String number, String token);
 
 
-
-
-
-
-
+    Commodity creatPass(Commodity commodity);
 }
