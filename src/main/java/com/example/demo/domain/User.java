@@ -13,6 +13,8 @@ public class User {
     private String uname;
     private String password;
 
+
+
     public Long getUid() {
         return uid;
     }
