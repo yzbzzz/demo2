@@ -4,15 +4,15 @@ public class Result<T> {
     private String code;
     private String msg;
     private T data;
-    private String Token;
-
-    public String getToken() {
-        return Token;
-    }
-
-    public void setToken(String token) {
-        Token = token;
-    }
+//    private String Token;
+//
+//    public String getToken() {
+//        return Token;
+//    }
+//
+//    public void setToken(String token) {
+//        Token = token;
+//    }
 
     public String getCode() {
         return code;
@@ -59,11 +59,10 @@ public class Result<T> {
         return result;
     }
 
-    public static <T> Result<T> success(T data,String msg,String token) {
+    public static <T> Result<T> success(T data,String msg ){
         Result<T> result = new Result<>(data);
-        result.setCode("0");
+        result.setCode("200");
         result.setMsg(msg);
-        result.setToken(token);
         return result;
     }
 

@@ -25,14 +25,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User loginService(String uname, String password) {
-
-        // 如果账号密码都对则返回登录的用户对象，若有一个错误则返回null
         User user = userDao.findByUnameAndPassword(uname, password);
-        // 重要信息置空
         if (user != null) {
-            user.setPassword("");
+            return loginPass(user);
+        } else {
+            return null;
         }
-        return user;
     }
 
     @Override
@@ -55,14 +53,59 @@ public class UserServiceImpl implements UserService {
         else return null;
     }
 
-    public User Pass(User user) {
+    @Override
+    public User putService(String uname,String password,String token) {
+       User user = userDao.findByUname(uname);
+        User errorUser = new User();
+       if(user!=null){
+           if(user.getToken().equals(token)){
+               user.setPassword(password);
+               return putPass(user);
+           }
+           else errorUser.setUname("token错误");
+           return errorUser;
+       }
+       else errorUser.setUname("用户名不存在");
+       return errorUser;
+    }
+
+
+    @Override
+    public User loginPass(User user) {
+        //返回创建好的用户对象(带uid)
+        String token = createToken(user.getUname());
+        user.setToken(token);
+        User newUser = userDao.save(user);
+        newUser.setPassword("");
+        newUser.setToken(token);
+        return newUser;
+    }
+    @Override
+    public User registPass(User user) {
+        //返回创建好的用户对象(带uid)
+        String token = createToken(user.getUname());
+        user.setToken(token);
+        User newUser = userDao.save(user);
+        newUser.setPassword("");
+        newUser.setToken(token);
+        return newUser;
+    }
+    @Override
+    public User putPass(User user) {
+        //返回创建好的用户对象(带uid)
+        User newUser = userDao.save(user);
+        newUser.setPassword("");
+        return newUser;
+    }
+    @Override
+    public User deletePass(User user) {
         //返回创建好的用户对象(带uid)
         User newUser = userDao.save(user);
         newUser.setPassword("");
 
         return newUser;
     }
-
+    @Override
     public  String createToken(String uname){
         JwtBuilder jwtBuilder= Jwts.builder();
         return jwtBuilder
