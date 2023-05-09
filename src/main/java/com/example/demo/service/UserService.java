@@ -30,13 +30,24 @@ public interface UserService {
 
 
 
+    /**
+     * 登录业务逻辑
+     * @param uname 账户名
+     * @param password 密码
+     * @param token token
+     * @return
+     */
+    User deleteService(String uname, String password, String token);
+
+
+
     User loginPass(User user);
 
     User registPass(User user);
 
     User putPass(User user);
 
-    User deletePass(User user);
+//    User deletePass(User user);
 
 
 

@@ -19,7 +19,7 @@ public class UserController {
         if (user != null) {
             return Result.success(user, "登录成功！");
         } else {
-            return Result.error("123", "账号或密码错误！");
+            return Result.error("101", "账号或密码错误！");
         }
     }
 
@@ -31,12 +31,12 @@ public class UserController {
             return Result.success(user1, "注册成功！");
         } else {
             if (errorCode.equals("用户名长度不能超过10位")) {
-                return Result.error("456", "用户名长度不能超过10位！");
+                return Result.error("301", "用户名长度不能超过10位！");
             } else if (errorCode.equals("用户名已存在")) {
-                return Result.error("457", "用户名已存在！");
+                return Result.error("302", "用户名已存在！");
             } else if (errorCode.equals("用户名或密码为空")) {
-                return Result.error("458", "用户名或密码为空！");
-            } else return Result.error("123", "注册失败！");
+                return Result.error("303", "用户名或密码为空！");
+            } else return Result.error("399", "注册失败！");
 
         }
     }
@@ -49,12 +49,29 @@ public class UserController {
             return Result.success(user, "密码修改成功！");
         }
         else if(user.getUname().equals("token错误")) {
-            return Result.error("400", "token错误！");
+            return Result.error("401", "token错误！");
         }
         else if (user.getUname().equals("用户名不存在")) {
-            return Result.error("401", "用户名不存在！");
+            return Result.error("402", "用户名不存在！");
         } else {
-            return Result.error("402", "密码修改失败！");
+            return Result.error("499", "密码修改失败！");
+        }
+    }
+
+
+    @DeleteMapping("/delete")
+    public Result<User> deleteController(@RequestParam String uname,@RequestParam String password, @RequestParam String token) {
+        User user = userService.deleteService(uname, password,token);
+        if (user == null) {
+            return Result.success(user, "删除成功！");
+        }
+        else if(user.getUname().equals("token错误")) {
+            return Result.error("501", "token错误！");
+        }
+        else if (user.getUname().equals("账号或密码错误")) {
+            return Result.error("502", "账号或密码错误！");
+        } else {
+            return Result.error("503", "删除失败！");
         }
     }
 }

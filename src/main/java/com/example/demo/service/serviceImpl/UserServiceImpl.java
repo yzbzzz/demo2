@@ -71,6 +71,24 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public User deleteService(String uname,String password, String token) {
+        User user = userDao.findByUnameAndPassword(uname,password);
+        User errorUser = new User();
+        if(user!=null){
+            if(user.getToken().equals(token)){
+                userDao.delete(user);
+                return null;
+            }
+            else errorUser.setUname("token错误");
+            return errorUser;
+        }
+        else errorUser.setUname("账号或密码错误");
+        return errorUser;
+    }
+
+
+
+    @Override
     public User loginPass(User user) {
         //返回创建好的用户对象(带uid)
         String token = createToken(user.getUname());
@@ -95,16 +113,17 @@ public class UserServiceImpl implements UserService {
         //返回创建好的用户对象(带uid)
         User newUser = userDao.save(user);
         newUser.setPassword("");
+        newUser.setToken("");
         return newUser;
     }
-    @Override
-    public User deletePass(User user) {
-        //返回创建好的用户对象(带uid)
-        User newUser = userDao.save(user);
-        newUser.setPassword("");
-
-        return newUser;
-    }
+//    @Override
+//    public User deletePass(User user) {
+//        //返回创建好的用户对象(带uid)
+//        User newUser = userDao.save(user);
+//        newUser.setPassword("");
+//
+//        return newUser;
+//    }
     @Override
     public  String createToken(String uname){
         JwtBuilder jwtBuilder= Jwts.builder();
