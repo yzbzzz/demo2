@@ -1,6 +1,7 @@
 package com.example.demo.service.serviceImpl;
 
 import com.example.demo.domain.User;
+import com.example.demo.domain.User_log;
 import com.example.demo.repository.UserDao;
 import com.example.demo.service.UserService;
 import io.jsonwebtoken.JwtBuilder;
@@ -91,9 +92,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loginPass(User user) {
         //返回创建好的用户对象(带uid)
+        User_log user_log = new User_log(user.getUid(),user.getUname(),"登录",System.currentTimeMillis()/ 1000);;
         String token = createToken(user.getUname());
         user.setToken(token);
         User newUser = userDao.save(user);
+        userDao.save(user_log);
         newUser.setPassword("");
         newUser.setToken(token);
         return newUser;
@@ -104,6 +107,8 @@ public class UserServiceImpl implements UserService {
         String token = createToken(user.getUname());
         user.setToken(token);
         User newUser = userDao.save(user);
+        User_log user_log = new User_log(user.getUid(),user.getUname(),"注册",System.currentTimeMillis()/ 1000);;
+        userDao.save(user_log);
         newUser.setPassword("");
         newUser.setToken(token);
         return newUser;

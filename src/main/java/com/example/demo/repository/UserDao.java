@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.User;
+import com.example.demo.domain.User_log;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
         User findByUnameAndPassword(String uname, String password);//通过用户名uname和密码查找用户
 
         User deleteByUname(String uname);//通过用户名删除用户
+
+        User_log save(User_log user_log);
     }
 
 
