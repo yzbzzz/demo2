@@ -9,7 +9,7 @@ public class User_log {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-        private Long id;
+        private long id;
         private long uuid;
         private String uname;
         private String type;
@@ -26,11 +26,11 @@ public class User_log {
 
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
