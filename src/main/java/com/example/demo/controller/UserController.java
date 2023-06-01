@@ -30,13 +30,12 @@ public class UserController {
             User user1 = userService.registPass(newUser);
             return Result.success(user1, "注册成功！");
         } else {
-            if (errorCode.equals("用户名长度不能超过10位")) {
-                return Result.error("301", "用户名长度不能超过10位！");
-            } else if (errorCode.equals("用户名已存在")) {
-                return Result.error("302", "用户名已存在！");
-            } else if (errorCode.equals("用户名或密码为空")) {
-                return Result.error("303", "用户名或密码为空！");
-            } else return Result.error("399", "注册失败！");
+            return switch (errorCode) {
+                case "用户名长度不能超过10位" -> Result.error("301", "用户名长度不能超过10位！");
+                case "用户名已存在" -> Result.error("302", "用户名已存在！");
+                case "用户名或密码为空" -> Result.error("303", "用户名或密码为空！");
+                default -> Result.error("399", "注册失败！");
+            };
 
         }
     }
@@ -63,7 +62,7 @@ public class UserController {
     public Result<User> deleteController(@RequestParam String uname,@RequestParam String password, @RequestParam String token) {
         User user = userService.deleteService(uname, password,token);
         if (user == null) {
-            return Result.success(user, "删除成功！");
+            return Result.success(null, "删除成功！");
         }
         else if(user.getUname().equals("token错误")) {
             return Result.error("501", "token错误！");
