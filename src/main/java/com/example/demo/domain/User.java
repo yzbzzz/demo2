@@ -15,6 +15,16 @@ public class User {
 
     private String token;
 
+    private String balance;
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+
     public String getToken() {
         return token;
     }
