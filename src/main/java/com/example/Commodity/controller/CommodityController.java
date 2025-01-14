@@ -3,7 +3,7 @@ package com.example.Commodity.controller;
 
 import com.example.Commodity.domain.Commodity;
 import com.example.Commodity.service.CommodityService;
-import com.example.acount.utils.Result;
+import com.example.Commodity.utils.Result;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/commodity")
+
 public class CommodityController {
 
     @Resource

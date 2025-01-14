@@ -5,6 +5,7 @@ import com.example.Commodity.repository.CommodityDao;
 import com.example.Commodity.service.CommodityService;
 import jakarta.annotation.Resource;
 
+
 public class CommodityServiceImpl implements CommodityService {
     @Resource
     private CommodityDao commodityDao;
